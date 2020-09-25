@@ -65,7 +65,7 @@ export class CdkVueArtifactStack extends cdk.Stack {
                     },
                     build: {
                         commands: [
-                            "cd vue-app",
+                            "cd vue-web-component-app",
                             "npm install",
                             "npm run lint",
                             "npm run test"
@@ -88,7 +88,7 @@ export class CdkVueArtifactStack extends cdk.Stack {
                     },
                     build: {
                         commands: [
-                            "cd vue-app",
+                            "cd vue-web-component-app",
                             "npm install",
                             "npm run build"
                         ]
