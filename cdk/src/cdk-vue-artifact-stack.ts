@@ -53,7 +53,6 @@ export class CdkVueArtifactStack extends cdk.Stack {
 
         const pipelineArtifact = new pipeline.Artifact('RepoSource');
         const buildArtifact = new pipeline.Artifact('BuildOutput');
-        //const oauth = cdk.SecretValue.secretsManager('my-github-token');
         const testBuild = new codebuild.PipelineProject(this, "TestBuild", {
             buildSpec: codebuild.BuildSpec.fromObject({
                 version: "0.2",
@@ -164,7 +163,7 @@ export class CdkVueArtifactStack extends cdk.Stack {
                                 emailNotifications.valueAsString
                             ],
                             additionalInformation: 'Approve Deployment to S3?',
-                            externalEntityLink: `https://github.com/${githubOwner.valueAsString}/${githubBranch.valueAsString}`,
+                            externalEntityLink: `https://github.com/${githubOwner.valueAsString}/${githubRepoName.valueAsString}`,
                             notificationTopic: pipelineNotificationTopic,
                             runOrder: 1
                         })
