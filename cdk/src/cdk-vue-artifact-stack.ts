@@ -99,7 +99,7 @@ export class CdkVueArtifactStack extends cdk.Stack {
                         "dist/**/*"
                     ],
                     "discard-paths": "no",
-                    "base-directory": "vue-app"
+                    "base-directory": "vue-web-component-app"
                 }
             }),
             environment: {
