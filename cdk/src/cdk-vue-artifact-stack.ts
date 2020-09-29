@@ -8,6 +8,9 @@ import * as sns from '@aws-cdk/aws-sns'
 import * as pipelineActions from '@aws-cdk/aws-codepipeline-actions'
 import * as sm from "@aws-cdk/aws-secretsmanager";
 import {CfnParameter} from '@aws-cdk/core';
+import { OriginAccessIdentity } from '@aws-cdk/aws-cloudfront';
+
+//cdk deploy command: cdk deploy --parameters githubRepoName=CdkVueComponent --parameters githubBranch=master --parameters githubOwner=cnathan1 --parameters emailNotifications=butlercw@amazon.com
 
 export class CdkVueArtifactStack extends cdk.Stack {
     constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
@@ -40,15 +43,18 @@ export class CdkVueArtifactStack extends cdk.Stack {
             removalPolicy: core.RemovalPolicy.DESTROY
         });
 
+        const oai = new OriginAccessIdentity(this, 'OriginAccessIdentity', {comment: "Origin Access Identity for Origin S3 bucket"});
         const distribution = new cf.CloudFrontWebDistribution(this, 'VueComponentDistribution', {
             originConfigs: [
                 {
                     s3OriginSource: {
-                        s3BucketSource: deployBucket
+                        s3BucketSource: deployBucket,
+                        originAccessIdentity: oai
                     },
                     behaviors: [{isDefaultBehavior: true}]
                 }
-            ]
+            ],
+            defaultRootObject: 'index.html'
         });
 
         const pipelineArtifact = new pipeline.Artifact('RepoSource');
@@ -89,16 +95,17 @@ export class CdkVueArtifactStack extends cdk.Stack {
                         commands: [
                             "cd vue-web-component-app",
                             "npm install",
-                            "npm run build"
+                            "npm run build",
+                            "mv dist ../dist"
                         ]
                     }
                 },
                 artifacts: {
                     files: [
-                        "dist/**/*"
+                        "**/*"
                     ],
                     "discard-paths": "no",
-                    "base-directory": "vue-web-component-app"
+                    "base-directory": "dist"
                 }
             }),
             environment: {
