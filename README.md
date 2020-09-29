@@ -14,11 +14,16 @@
     a. Secret name: my-github-token
     b. Secret key: my-github-token
     c. Secret value: <oauth-token-generated>
-5. Navigate to cdk directory: cd cdk/
-6. Install the dependencies: npm install
-7. Build the stack: npm run build
-8. Optionally run this command if you want to see generated CloudFormation template: cdk synth
-9. Deploy your cdk stack: cdk deploy --parameters githubRepoName=<your-github-repo-name> --parameters githubBranch=<your-github-repo-branch> --parameters githubOwner=<your-github-owner-name> --parameters emailNotifications=<your-email-id>
+5. Navigate to cdk directory:
+    `cd cdk/`
+6. Install the dependencies: 
+    `npm install`
+7. Build the stack: 
+    `npm run build`
+8. Optionally run this command if you want to see generated CloudFormation template: 
+    `cdk synth`
+9. Deploy your cdk stack: 
+    `cdk deploy --parameters githubRepoName=<your-github-repo-name> --parameters githubBranch=<your-github-repo-branch> --parameters githubOwner=<your-github-owner-name> --parameters emailNotifications=<your-email-id>`
 10. Once the cdk stack is deployed, you will see an output like this with stack ARN:
 
     ✅  CdkVueArtifactStack
