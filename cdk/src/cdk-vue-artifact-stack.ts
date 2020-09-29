@@ -95,8 +95,10 @@ export class CdkVueArtifactStack extends cdk.Stack {
                         commands: [
                             "cd vue-web-component-app",
                             "npm install",
-                            "npm run build",
-                            "mv dist ../dist"
+                            "./node_modules/.bin/vue-cli-service build --target wc --inline-vue --name counter-app CounterApp.vue",
+                            "./node_modules/.bin/vue-cli-service build --target wc --inline-vue --name addition-app AdditionApp.vue",
+                            "mv dist ../dist",
+                            "cp -a public/. ../dist/"
                         ]
                     }
                 },
