@@ -1,6 +1,6 @@
 <template>
   <div class="counter">
-    <input v-model="counter" placeholder="edit me">
+    <input id="count" v-model="counter" placeholder="edit me">
     <button @click="increment">Add Counter</button>
     <button @click="decrement">Subtract Counter</button>
   </div>

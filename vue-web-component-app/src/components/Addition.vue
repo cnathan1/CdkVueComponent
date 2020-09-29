@@ -2,7 +2,7 @@
   <div class="counter">
     <input type="number" v-model="number1" placeholder="edit me">
     <input type="number" v-model="number2" placeholder="edit me">
-    <input type="number" v-model="result" placeholder="edit me">
+    <input id="addition" type="number" v-model="result" placeholder="edit me">
     <button @click="sum">Get Sum</button>
   </div>
 </template>
