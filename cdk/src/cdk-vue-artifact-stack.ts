@@ -10,7 +10,7 @@ import * as sm from "@aws-cdk/aws-secretsmanager";
 import {CfnParameter} from '@aws-cdk/core';
 import { OriginAccessIdentity } from '@aws-cdk/aws-cloudfront';
 
-//cdk deploy command: cdk deploy --parameters githubRepoName=CdkVueComponent --parameters githubBranch=master --parameters githubOwner=cnathan1 --parameters emailNotifications=butlercw@amazon.com
+// cdk deploy command: cdk deploy --parameters githubRepoName=<your-github-repo-name> --parameters githubBranch=<your-github-repo-branch> --parameters githubOwner=<your-github-owner-name> --parameters emailNotifications=<your-email-id>
 
 export class CdkVueArtifactStack extends cdk.Stack {
     constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
@@ -96,8 +96,9 @@ export class CdkVueArtifactStack extends cdk.Stack {
                             "cd vue-web-component-app",
                             "npm install",
                             "./node_modules/.bin/vue-cli-service build --target wc --inline-vue --name counter-app src/CounterApp.vue",
-                            "./node_modules/.bin/vue-cli-service build --target wc --inline-vue --name addition-app src/AdditionApp.vue",
                             "mv dist ../dist",
+                            "./node_modules/.bin/vue-cli-service build --target wc --inline-vue --name addition-app src/AdditionApp.vue",
+                            "cp -a dist/. ../dist/",
                             "cp -a public/. ../dist/"
                         ]
                     }
